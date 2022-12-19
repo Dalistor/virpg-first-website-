@@ -1,0 +1,31 @@
+{% extends 'main_model.html' %}
+{% load static %}
+
+{% block head %}
+	<title>virRPG - configurações da campanha</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/campaign_edit.css' %}">
+{% endblock %}
+
+{% block main %}
+	<main class="container">
+		<form class="form" method="POST">
+			{% csrf_token %}
+			<label>Nome: <input type="text" name="name" id="id_name" required value="{{character.name}}"></label>
+			<div class="private">
+				<label for="id_is_private">Privado: </label>
+				<select name="is_private" id="id_is_private">
+					{% if character.is_private == 'yes' %}
+					<option value="yes" selected>Sim</option>
+					<option value="no">Não</option>
+					{% elif character.is_private == 'no' %}
+					<option value="yes">Sim</option>
+					<option value="no" selected>Não</option>
+					{% endif %}
+				</select>
+			</div>
+			
+			<input type="submit" class="submit">
+		</form>
+	</main>
+{% endblock %}

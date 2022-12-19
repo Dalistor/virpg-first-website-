@@ -1,0 +1,244 @@
+.character-name {
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 30px;
+}
+
+.character-atributes {
+	display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.character-atributes .atribute_points {
+	margin-top: 2rem;
+    text-align: center;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+	border: solid black 2px;
+	border-radius: 10px;
+	width: 20%;
+}
+
+.atributes_points {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.atributes-operation_button {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: orange;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    transition: 1s;
+}
+
+.atributes-operation_button:hover {
+	transform: scale(1.1);
+	cursor: pointer;
+}
+
+.atributes-all {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.atributes {
+	margin-top: 2rem;
+}
+
+.atributes h1 {
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.atribute_points {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1.5rem;
+}
+
+.atribute-button {
+	cursor: pointer;
+    background-color: azure;
+}
+
+.atribute-button:hover {
+    background-color: #d8e5e5;
+}
+
+.atributes_block {
+	margin-top: 2rem;
+    width: 65vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.atribute p, .atribute h1{
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.atribute h1 {
+	cursor: pointer;
+}
+
+.atribute {
+    padding: 0.5em;
+    width: 150px;
+    border: solid black 2px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#strength:hover {
+	cursor: pointer;
+	border-color: red;
+	transform: scale(1.1);
+}
+
+#dexterity:hover {
+	cursor: pointer;
+	border-color: blue;
+	transform: scale(1.1);
+}
+
+#vigor:hover {
+	cursor: pointer;
+	border-color: yellow;
+	transform: scale(1.1);
+}
+
+#inteligence:hover {
+	cursor: pointer;
+	border-color: pink;
+	transform: scale(1.1);
+}
+
+#personality:hover {
+    cursor: pointer;
+    border-color: purple;
+    transform: scale(1.1);
+}
+
+.atributes_block-img {
+	width: 50%;
+    margin: 33%;
+}
+
+
+.distribute_points {
+	font-size: 30px;
+}
+
+.skills {
+	margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.skills-lists {
+	display: flex;
+	flex-direction: column;
+    justify-content: center;
+    width: 40%;
+}
+
+.skill {
+	display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    font-size: 25px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.skill_name {
+	display: flex;
+}
+
+.skill_name:hover {
+	cursor: pointer;
+}
+
+#skill_value {
+	margin-left: 0.5rem;
+}
+
+.points {
+	padding-left: 1rem
+}
+
+.operation_button {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: azure;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    transition: 1s;
+}
+
+.operation_button:hover {
+	transform: scale(1.1);
+	background-color: #d8e5e5;
+	cursor: pointer;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.submit {
+    background: yellow;
+    border-radius: 5px;
+    padding: 0.5rem 2rem;
+    transition: 1s;
+}
+
+.submit:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}
+
+.gambiarra {
+	display: none;
+}
+
+@media screen and (max-width: 600px) {
+	.character-atributes {
+		flex-direction: column;
+	}
+
+	.character-atributes .atribute_points {
+		width: 90%;
+	}
+
+	.skills-lists {
+		width: 100%;
+		margin: 0 7%;
+	}
+
+	.menu {
+		top: 7%;
+	}
+
+	.atribute {
+		margin: 1rem;
+	}
+}

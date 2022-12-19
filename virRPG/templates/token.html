@@ -1,0 +1,157 @@
+{% extends 'main_model.html' %}
+{% load static %}
+
+{% block head %}
+	<title>{{character.name}}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/token.css' %}">
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="{% static 'js/autoSave.js' %}"></script>
+	<script src="{% static 'js/token.js' %}"></script>
+
+	<script>
+
+		document.addEventListener('keydown', (e)=> {
+
+			if (e == 13) {
+				e.preventDefault()
+			}
+
+		})
+
+	</script>
+{% endblock %}
+
+{% block main %}
+
+	<main class="container">
+		<h1 class="character-name">{{character.name}}</h1>
+
+		<div class="character-status">
+			<div class="character-hp" id="hp_points">{{character.hp_points}}</div>
+			<div class="character-pe" id="pe_points">{{character.pe_points}}</div>
+		</div>
+
+		<section class="character-atributes">
+			<div class="atribute_points" id="skill_points">
+				<h2>pontos de perícia</h2>
+				<div class="atributes_points" id="skill_point">
+					{{character.skill_points}}
+				</div>
+			</div>
+
+			<div class="atribute_points" id="atribute_points">
+				<h2>pontos de atributo</h2>
+				<div class="atributes_points" id="atribute_point">
+					{{character.atribute_points}}
+				</div>
+			</div>
+		</section>
+
+			<div class="atributes_block">
+				<div class="atribute" id="strenght">
+					<a href="{{character.id}}/skills">
+						<p>perícias</p>
+						<img src="{% static 'imgs/skills.png' %}" class="atributes_block-img">
+					</a>
+				</div>
+			</div>
+
+		<section class="dices">
+			<div class="dice" id="d4">
+				<img src="{% static 'imgs/D4.png' %}" class="dice-img">
+				<p>D4</p>
+			</div>
+			<div class="dice" id="d6">
+				<img src="{% static 'imgs/D6.png' %}" class="dice-img">
+				<p>D6</p>
+			</div>
+			<div class="dice" id="d8">
+				<img src="{% static 'imgs/D8.png' %}" class="dice-img">
+				<p>D8</p>
+			</div>
+			<div class="dice" id="d10">
+				<img src="{% static 'imgs/D10.png' %}" class="dice-img">
+				<p>D10</p>
+			</div>
+			<div class="dice" id="d12">
+				<img src="{% static 'imgs/D12.png' %}" class="dice-img">
+				<p>D12</p>
+			</div>
+			<div class="dice" id="d20">
+				<img src="{% static 'imgs/D20.png' %}" class="dice-img">
+				<p>D20</p>
+			</div>
+			<div class="dice" id="d100">
+				<img src="{% static 'imgs/D%.png' %}" class="dice-img">
+				<p>D%</p>
+			</div>			
+		</section>
+
+		<section class="attacks">
+			<div class="attacks-register">
+				<form method="POST" id="task-form">
+					<a href="{{character.id}}/register_attack/" class="attacks-link">
+						registrar ataque
+					</a>
+				</form>
+				
+			</div>
+
+			<div class="attacks-catalog">
+				{% for attack in attacks %}
+				<div class="attacks-content" >
+					<div class="attacks-block" id="ac-{{attack.id}}">
+						<p id="attack_name">{{attack.name}}</p>
+						<p id="attack_formula-{{attack.id}}">{{attack.fixed}}+{{attack.times}}{{attack.dice_type}}</p>
+					</div>
+
+					<div class="attacks-operation">
+						<a href="{{character.id}}/edit_attack/{{attack.id}}" class="attacks-catalog-link">editar</a>
+						<button id="id_{{attack.id}}" class="attacks-catalog-del">excluir</button>
+					</div>
+					
+				</div>
+				{% endfor %}
+
+				<script type="text/javascript">
+					const del = document.querySelectorAll('.attacks-catalog-del')
+
+					del.forEach((item)=> {
+						item.addEventListener("click", ()=> {
+							let link = item.id
+							link = link.split('_')
+							link = window.location.href + '/del_attack/' + link[1]
+
+							let conf = confirm('Quer deletar esse golpe?')
+
+							if (conf) {
+								window.location.href = link
+							}
+						})
+					})
+				</script>
+			</div>
+		</section>
+
+		<form method="POST" enctype="multipart/form-data" class="infos" id="form">
+			{% csrf_token %}
+
+			<textarea class="info" name="infos" id="id_infos" placeholder="Insira as informações do seu personagem aqui.">{{character.infos}}</textarea>
+
+			<div class="popup-wrapper" id="popup-wrapper">
+				<div class="popup">
+					<div class="popup-close" id="popup-close">x</div>
+					<div class="popup-content">
+						<label class="popup-content-label" id="popup-content-label">Insira o novo valor</label>
+						<input type="number" class="popup-content-input" name="" id="">
+						<div class="popup-content-operations">
+							<button class="popup-content-button" id="add" type="button">somar</button>
+							<button type="button" class="popup-content-button" id="popup-content-button">salvar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}

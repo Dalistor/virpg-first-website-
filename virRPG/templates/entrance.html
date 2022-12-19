@@ -1,0 +1,21 @@
+{% extends 'entrance_model.html' %}
+{% load static %}
+
+	{% block head %}
+	<title>virRPG - entrada</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/entrance.css' %}">
+	<script src="{% static 'js/entrance.js' %}"></script>
+	{% endblock %}
+
+	{% block body %}
+	<section>
+
+		<div class="log-in">
+			<button type="button" class="log" id="login">login</button>
+			<button type="button" class="log" id="register">registrar</button>
+		</div>
+
+	</section>
+	{% endblock %}
+
+

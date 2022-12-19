@@ -1,0 +1,146 @@
+.main-top {
+	display: flex;
+	justify-content: space-around;
+}
+
+.main-top button {
+	border-radius: 5px;
+	padding: 0.3rem;
+	background-color: #00ff3e;
+	transition: 0.5s;
+}
+
+.main-top button:hover {
+	cursor: pointer;
+	background-color: #7cff9c;
+}
+
+.main-top input {
+	width: 80vh;
+	padding: 0.5rem;
+}
+
+.search-form {
+	display: flex;
+}
+
+.search-btn {
+	display: flex;
+	align-items: center;
+	border: solid black 1px;
+	border-left: none;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+	text-align: center;
+	background-color: yellow;
+	transition: 0.5s;
+}
+
+.search-btn:hover {
+	cursor: pointer;
+	background-color: #ffff78;
+}
+
+.characters {
+	margin-top: 2rem;
+}
+
+.character-view {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3%;
+    padding: 10px;
+    border: solid black 1px;
+    border-radius: 5px;
+}
+
+.character-view .character a {
+	text-decoration: none;
+	color: #000000;
+}
+
+.character, .character_del {
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+.character:hover, .character_del:hover{
+	cursor: pointer;
+}
+
+.character a:hover {
+	color: #00ff3e;
+}
+
+.character_del a {
+	text-decoration: none;
+	color: black;
+}
+
+.character_del:hover a {
+	color: #ff0000;
+}
+
+.character_edit a {
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+.character_edit a:hover {
+	color: orange;
+}
+
+.paginator {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 95vh;
+    right: 25%;
+    left: 25%;
+}
+
+.paginator nav {
+	display: flex;
+}
+
+.paginator nav a {
+	text-decoration: none;
+}
+
+.paginator nav p {
+	margin: 0 1rem;
+}
+
+.paginator-a-y {
+	color: #00ff3e;
+	cursor: pointer;
+}
+
+.paginator-a-n {
+	color: grey;
+}
+
+@media screen and (max-width: 650px) {
+	.main-top {		
+	    display: flex;
+    	flex-direction: column;
+    	height: 5rem;
+    	justify-content: space-between;
+	}
+
+	.paginator {
+		right: 10%;
+		left: 10%;
+		top: 85vh;
+	}
+
+	.character-view {
+		margin: 7% 0;
+	}
+
+	.menu {
+		top: 7%;
+	}
+}

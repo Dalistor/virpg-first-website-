@@ -1,0 +1,105 @@
+body {
+	overflow-x: hidden;
+}
+
+/*cabeçalho*/
+
+.header-main {
+	display: flex;
+    justify-content: space-between;
+    background-color: #000000;
+    padding: 0 3%;
+}
+
+.header-main .title {
+	color: #ffffff;
+	font-size: 25px;
+}
+
+.header-main .perfil {
+	color: white;
+}
+
+.perfil p:hover {
+	cursor: pointer;
+}
+
+.menu {
+    margin-top: 2%;
+    margin-right: 0.5%;
+    padding-top: 5%;
+    position: absolute;
+    right: 0%;
+    top: 4%;
+    transform: rotateX(-90deg);
+    transform-origin: center;
+    transition: 0.5s;
+}
+
+.c-dropdown {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	margin: 0;
+	padding: 10px;
+	border-radius: 5px;
+	background-color: #000000;
+}
+
+.c-dropdown a {
+	text-decoration: none;
+}
+
+.perfil:hover .menu {
+	transform: rotateX(0deg);
+}
+
+.c-dropdown__item {
+	color: #ffffff;
+	text-align: center;
+	padding: 5px;
+}
+
+.c-dropdown__item a {
+	text-decoration: none;
+	color: white;
+}
+
+.c-dropdown__item:hover {
+	cursor: pointer;
+    background-color: #ffffff;
+}
+
+.c-dropdown__item:hover {
+	color: black;
+}
+
+.container {
+	margin: 5%;
+}
+
+.input {
+	width: 150px;
+    border: 1px solid black;
+    display: flex;
+    margin: 0.5em 0.5em;
+}
+
+main form {
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+    justify-content: space-around;
+}
+
+.input {
+	margin-left: 1rem;
+}
+
+.submit_button {
+    width: 100px;
+    background-color: lime;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+}

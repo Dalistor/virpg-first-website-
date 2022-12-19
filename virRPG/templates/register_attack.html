@@ -1,0 +1,46 @@
+{% extends 'main_model.html' %}
+{% load static %}
+
+{% block head %}
+	<title>virRPG - registrar ataque</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/new_attack.css' %}">
+	<script type="text/javascript">
+		window.onload = ()=> {
+			const url = window.location.href
+			let id = url.split('/')
+			id = id[4]
+
+			const id_input = document.getElementById('id_character_id')
+
+			id_input.value = id
+		}
+	</script>
+{% endblock %}
+
+{% block main %}
+	<main class="container">
+		<form method="POST">
+			{% csrf_token %}
+			<label>Nome do ataque: <input type="text" name="name" maxlength="50" id="id_name" class="input" value="{{attack.name}}" required></label>
+			<label>Dano fixo: <input type="number" name="fixed" id="id_fixed" class="input" value="{{attack.fixed}}" required max="1000"></label>
+			<label for="id_dice_type">Tipo de dado: 
+				<select name="dice_type" id="id_dice_type" required class="input">
+					<option value="D4" {% if attack.dice_type == "D4" %} selected {%endif%}>D4</option>
+					<option value="D6" {% if attack.dice_type == "D6" %} selected {%endif%}>D6</option>
+					<option value="D8" {% if attack.dice_type == "D8" %} selected {%endif%}>D8</option>
+					<option value="D10" {% if attack.dice_type == "D10" %} selected {%endif%}>D10</option>
+					<option value="D12" {% if attack.dice_type == "D12" %} selected {%endif%}>D12</option>
+					<option value="D20" {% if attack.dice_type == "D20" %} selected {%endif%}>D20</option>
+					<option value="D%" {% if attack.dice_type == "D%" %} selected {%endif%}>D%</option>
+				</select>
+			</label>
+
+			<label>Quantidade: <input type="number" name="times" id="id_times" class="input" value="{{attack.times}}" required></label>
+
+			<input type="number" name="character_id" id="id_character_id" style="display: none">
+
+			<input type="submit" value="registrar" class="submit_button">
+		</form>
+	</main>
+{% endblock %}

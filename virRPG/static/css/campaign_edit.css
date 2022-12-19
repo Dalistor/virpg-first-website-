@@ -1,0 +1,25 @@
+input, .private {
+    margin-top: 1rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit {
+    width: 100px;
+    background-color: orange;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.submit:hover {
+    transform: scale(1.1);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}

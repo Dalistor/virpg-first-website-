@@ -1,0 +1,296 @@
+{% extends 'main_model.html' %}
+{% load static %}
+{% block head %}
+	<title>
+		{{character.name}} - perícias
+	</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/atribute.css' %}">
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="{% static 'js/autoSave.js' %}"></script>
+	<script src="{% static 'js/atribute.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+	<main class="container">
+		<h1 class="character-name">{{character.name}}</h1>
+
+		<section class="character-atributes">
+
+			<div class="atribute_points">
+				<h2>pontos de perícia</h2>
+				<div class="atributes_points">
+					<div id="atributes_points">{{character.skill_points}}</div>
+				</div>
+			</div>
+			<div class="atribute_points">
+				<h2>pontos de atributo</h2>
+				<div class="atributes_points">
+					<div id="atribute_points">
+						{{character.atribute_points}}
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+		<section class="atributes">
+			<h1>atributos</h1>
+			
+			<div class="atributes-all">
+				<div class="atribute">
+					<h1 id="strength">força</h1>
+					<div class="atribute_points">
+						<button type="button" id="less_strength_points" class="atribute-button">-</button>
+						<p class="att_points" id="strength_points">{{character.strength_points}}</p>
+						<button type="button" id="more_strength_points" class="atribute-button">+</button>
+					</div>
+				</div>
+
+				<div class="atribute">
+					<h1 id="dexterity">destreza</h1>
+					<div class="atribute_points">
+						<button type="button" id="less_dexterity_points" class="atribute-button">-</button>
+						<p class="att_points" id="dexterity_points">{{character.dexterity_points}}</p>
+						<button type="button" id="more_dexterity_points" class="atribute-button">+</button>
+					</div>
+				</div>
+
+				<div class="atribute">
+					<h1 id="vigor">vigor</h1>
+					<div class="atribute_points">
+						<button type="button" id="less_vigor_points" class="atribute-button">-</button>
+						<p class="att_points" id="vigor_points">{{character.vigor_points}}</p>
+						<button type="button" id="more_vigor_points" class="atribute-button">+</button>
+					</div>
+				</div>
+
+				<div class="atribute">
+					<h1 id="inteligence">intelecto</h1>
+					<div class="atribute_points">
+						<button type="button" id="less_inteligence_points" class="atribute-button">-</button>
+						<p class="att_points" id="inteligence_points">{{character.inteligence_points}}</p>
+						<button type="button" id="more_inteligence_points" class="atribute-button">+</button>
+					</div>
+				</div>
+
+				<div class="atribute">
+					<h1 id="personality">personalidade</h1>
+					<div class="atribute_points">
+						<button type="button" id="less_personality_points" class="atribute-button">-</button>
+						<p class="att_points" id="personality_points">{{character.personality_points}}</p>
+						<button type="button" id="more_personality_points" class="atribute-button">+</button>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="skills">
+			<ul class="skills-lists">
+
+				<li class="skill">
+					<button class="operation_button" id="more_stunts_points">+</button>
+					<div class="skill_name" id="n-stunts_points">acrobacia: <div id="stunts_points"  class="points">{{character.stunts_points}}</div></div>
+					<button class="operation_button" id="less_stunts_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_training_points">+</button>
+					<div class="skill_name" id="n-training_points">adestramento: <div id="training_points"  class="points">{{character.training_points}}</div></div>
+					<button class="operation_button" id="less_training_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_athletic_points">+</button>
+					<div class="skill_name" id="n-athletic_points">atletismo: <div id="athletic_points"  class="points">{{character.athletic_points}}</div></div>
+					<button class="operation_button" id="less_athletic_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_agility_points">+</button>
+					<div class="skill_name" id="n-agility_points">agilidade: <div id="agility_points"  class="points">{{character.agility_points}}</div></div>
+					<button class="operation_button" id="less_agility_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_fight_points">+</button>
+					<div class="skill_name" id="n-fight_points">briga: <div id="fight_points" class="points">{{character.fight_points}}</div></div>
+					<button class="operation_button" id="less_fight_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_charisma_points">+</button>
+					<div class="skill_name" id="n-charisma_points">carisma: <div id="charisma_points"  class="points">{{character.charisma_points}}</div></div>
+					<button class="operation_button" id="less_charisma_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_knowledge_points">+</button>
+					<div class="skill_name" id="n-knowledge_points">conhecimento: <div id="knowledge_points"  class="points">{{character.knowledge_points}}</div></div>
+					<button class="operation_button" id="less_knowledge_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_constitution_points">+</button>
+					<div class="skill_name" id="n-constitution_points">constituição: <div id="constitution_points"  class="points">{{character.constitution_points}}</div></div>
+					<button class="operation_button" id="less_constitution_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_counter_points">+</button>
+					<div class="skill_name" id="n-counter_points">contra-ataque: <div id="counter_points"  class="points">{{character.counter_points}}</div></div>
+					<button class="operation_button" id="less_counter_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_culture_points">+</button>
+					<div class="skill_name" id="n-culture_points">cultura: <div id="culture_points"  class="points">{{character.culture_points}}</div></div>
+					<button class="operation_button" id="less_culture_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_block_points">+</button>
+					<div class="skill_name" id="n-block_points">bloqueio: <div id="block_points"  class="points">{{character.block_points}}</div></div>
+					<button class="operation_button" id="less_block_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_diplomacy_points">+</button>
+					<div class="skill_name" id="n-diplomacy_points">diplomacia: <div id="diplomacy_points"  class="points">{{character.diplomacy_points}}</div></div>
+					<button class="operation_button" id="less_diplomacy_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_determination_points">+</button>
+					<div class="skill_name" id="n-determination_points">determinação: <div id="determination_points"  class="points">{{character.determination_points}}</div></div>
+					<button class="operation_button" id="less_determination_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_eloquence_points">+</button>
+					<div class="skill_name" id="n-eloquence_points">eloquência: <div id="eloquence_points"  class="points">{{character.eloquence_points}}</div></div>
+					<button class="operation_button" id="less_eloquence_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_cheat_points">+</button>
+					<div class="skill_name" id="n-cheat_points">enganação: <div id="cheat_points"  class="points">{{character.cheat_points}}</div></div>
+					<button class="operation_button" id="less_cheat_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_effort_points">+</button>
+					<div class="skill_name" id="n-effort_points">esforço: <div id="effort_points"  class="points">{{character.effort_points}}</div></div>
+					<button class="operation_button" id="less_effort_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_dodge_points">+</button>
+					<div class="skill_name" id="n-dodge_points">esquiva: <div id="dodge_points"  class="points">{{character.dodge_points}}</div></div>
+					<button class="operation_button" id="less_dodge_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_fortitude_points">+</button>
+					<div class="skill_name" id="n-fortitude_points">fortitude: <div id="fortitude_points"  class="points">{{character.fortitude_points}}</div></div>
+					<button class="operation_button" id="less_fortitude_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_stealth_points">+</button>
+					<div class="skill_name" id="n-stealth_points">furtividade: <div id="stealth_points"  class="points">{{character.stealth_points}}</div></div>
+					<button class="operation_button" id="less_stealth_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_intuition_points">+</button>
+					<div class="skill_name" id="n-intuition_points">intuição: <div id="intuition_points"  class="points">{{character.intuition_points}}</div></div>
+					<button class="operation_button" id="less_intuition_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_investigation_points">+</button>
+					<div class="skill_name" id="n-investigation_points">investigação: <div id="investigation_points"  class="points">{{character.investigation_points}}</div></div>
+					<button class="operation_button" id="less_investigation_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_maneuver_points">+</button>
+					<div class="skill_name" id="n-maneuver_points">manobra: <div id="maneuver_points"  class="points">{{character.maneuver_points}}</div></div>
+					<button class="operation_button" id="less_maneuver_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_medicine_points">+</button>
+					<div class="skill_name" id="n-medicine_points">medicina: <div id="medicine_points"  class="points">{{character.medicine_points}}</div></div>
+					<button class="operation_button" id="less_medicine_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_aim_points">+</button>
+					<div class="skill_name" id="n-aim_points">mira: <div id="aim_points"  class="points">{{character.aim_points}}</div></div>
+					<button class="operation_button" id="less_aim_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_perception_points">+</button>
+					<div class="skill_name" id="n-perception_points">percepção: <div id="perception_points"  class="points">{{character.perception_points}}</div></div>
+					<button class="operation_button" id="less_perception_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_sleight_points">+</button>
+					<div class="skill_name" id="n-sleight_points">prestigitação: <div id="sleight_points"  class="points">{{character.sleight_points}}</div></div>
+					<button class="operation_button" id="less_sleight_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_search_points">+</button>
+					<div class="skill_name" id="n-search_points">procura: <div id="search_points"  class="points">{{character.search_points}}</div></div>
+					<button class="operation_button" id="less_search_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_resilience_points">+</button>
+					<div class="skill_name" id="n-resilience_points">resiliência: <div id="resilience_points"  class="points">{{character.resilience_points}}</div></div>
+					<button class="operation_button" id="less_resilience_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_resistance_points">+</button>
+					<div class="skill_name" id="n-resistance_points">resistência: <div id="resistance_points"  class="points">{{character.resistance_points}}</div></div>
+					<button class="operation_button" id="less_resistance_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_wisdom_points">+</button>
+					<div class="skill_name" id="n-wisdom_points">sabedoria: <div id="wisdom_points"  class="points">{{character.wisdom_points}}</div></div>
+					<button class="operation_button" id="less_wisdom_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_sanity_points">+</button>
+					<div class="skill_name" id="n-sanity_points">sanidade: <div id="sanity_points"  class="points">{{character.sanity_points}}</div></div>
+					<button class="operation_button" id="less_sanity_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_survival_points">+</button>
+					<div class="skill_name" id="n-survival_points">sobrevivência: <div id="survival_points"  class="points">{{character.survival_points}}</div></div>
+					<button class="operation_button" id="less_survival_points">-</button>
+				</li>
+
+				<li class="skill">
+					<button class="operation_button" id="more_luck_points">+</button>
+					<div class="skill_name" id="n-luck_points">sorte: <div id="luck_points"  class="points">{{character.luck_points}}</div></div>
+					<button class="operation_button" id="less_luck_points">-</button>
+				</li>
+			</ul>
+		</div>
+		<form method="POST" enctype="multipart/form-data" class="form" id="formu">
+			{% csrf_token %}
+			<div class="gambiarra">
+				{{form.as_p}}
+			</div>
+		</form>
+	</main>
+{% endblock %}

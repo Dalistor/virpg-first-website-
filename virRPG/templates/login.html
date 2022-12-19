@@ -1,0 +1,36 @@
+{% extends 'entrance_model.html' %}
+{% load static %}
+
+	{% block head %}
+	<title>virRPG - login</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/registration.css' %}">
+	{% endblock %}
+
+	{% block body %}
+	<section class="area">
+
+        <div class="login">
+
+            <h1 class="title">login</h1>
+
+            <form name="form-users" id="formUsers" method="post" action="/store_login/">
+
+                {% csrf_token %}
+
+                {% if msg %}
+                    <p id="{{class}}">{{msg}}</p>
+                {% endif %}
+
+                <input type="text" class="user-field" name="user" placeholder="personagem" autofocus required>
+                <input type="password" class="user-field" name="password" placeholder="senha" autofocus required>
+
+                <input type="submit" value="enviar" id="submit">
+
+            </form>
+
+            <p>Não tem uma conta? <a href="/register/">Crie uma</a></p>
+
+        </div>
+
+    </section>
+    {% endblock %}

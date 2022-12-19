@@ -1,0 +1,37 @@
+{% extends 'entrance_model.html' %}
+{% load static %}
+
+	{% block head %}
+	<title>virRPG - registro</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/registration.css' %}">
+	{% endblock %}
+
+	{% block body %}
+	<section class="area">
+
+        <div class="register">
+
+            <h1 class="title">registro</h1>
+
+            <form name="form-users" id="formUsers" method="post" action="/store_register/">
+
+                {% csrf_token %}
+
+                {% if msg %}
+                    <p id="{{class}}">{{msg}}</p>
+                {% endif %}
+
+                <input type="text" class="user-field" name="user" placeholder="personagem" autofocus required>
+                <input type="password" class="user-field" name="password" placeholder="senha" autofocus required>
+                <input type="password" class="user-field" name="confirm_password" placeholder="confirme sua senha" autofocus required></label>
+
+                <input type="submit" value="enviar" id="submit">
+
+            </form>
+
+            <p>Já tem um personagem? <a href="/login/">entrar</a></p>
+
+        </div>
+
+    </section>
+    {% endblock %}

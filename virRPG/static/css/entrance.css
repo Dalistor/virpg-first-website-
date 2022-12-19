@@ -1,0 +1,50 @@
+body {
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+section {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.log-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: #000000;
+    border-radius: 5px;
+    width: 30%;
+    height: 40%;
+    padding: 2rem;
+}
+
+.log {
+    background-color: #19ff00;
+    padding: 5% 20% 5% 20%;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: medium;
+    color: #000000;
+}
+
+@media screen and (max-width: 700px) {
+
+    .log-in {
+        width: 50%;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    .log-in {
+        width: 70%;
+    }
+
+}

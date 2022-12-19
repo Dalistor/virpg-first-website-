@@ -1,0 +1,112 @@
+{% extends 'main_model.html' %}
+{% load static %}
+
+	{% block head %}
+	<title>virRPG - personagens</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/characters.css' %}">
+	{% endblock %}
+
+	{% block main %}
+	<div class="popup-wrapper" id="popup-wrapper">
+		<div class="popup">
+			<div class="popup-close" id="popup-close">x</div>
+			<div class="popup-content">
+				<form method="POST">
+					{% csrf_token %}
+					<label class="popup-content-label" id="popup-content-label">Insira o nome do novo personagem</label>
+					<input type="text" class="popup-content-input" name="name" required="" id="id_name" maxlength="50">
+					<div class="popup-content-operacoes">
+						<input type="submit" class="popup-content-button" id="popup-content-button" name="criar">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<main class="container">
+		<div class="main-top">
+			<button type="button" id="new_person">+ novo personagem</button>
+			<script type="text/javascript">
+				const button_new = document.getElementById("new_person");
+				const popup = document.getElementById("popup-wrapper");
+				const button_create = document.getElementById("popup-content-button");
+				const popup_input = document.getElementById("popup-content-input");
+
+				button_new.addEventListener("click", ()=> {
+					 popup.style.display = 'block';
+				});
+
+				popup.addEventListener("click", ()=> {
+					const clickedClassName = event.target.classList[0];
+					const classNames = ['popup-close', 'popup-wrapper', 'popup-content-button']
+					const closePopup = classNames.some(className => className === clickedClassName);
+
+					if(closePopup) {
+						
+						popup.style.display = 'none';
+					}
+				});
+			</script>
+			<form method="GET" id="search-form" class="search-form">
+				<input type="search" name="search">
+				<i id="search-btn" class="search-btn">pesquisar</i>
+			</form>
+			<script type="text/javascript">
+				const searchButton = document.getElementById("search-btn")
+				const searchForm = document.getElementById("search-form")
+
+				searchButton.addEventListener("click", ()=> {
+					searchForm.submit();
+				})
+			</script>
+		</div>
+
+		<div class="characters">
+			<ul>
+				{% for character in characters %}
+				
+				<li class="character-view">
+					<span class="character"><a href="/token/{{character.id}}" target="_blank">{{character.name}}</a></span>
+
+					{% if character.is_private == 'yes' or request.user.is_staff or campaign.user == request.user %}
+					<div>
+						<span class="character_edit"><a class="edit" href="edit/{{character.id}}">editar</a></span>
+						<span class="character_del"><a class="delete" id="id_{{character.id}}">excluir</a></span>
+					</div>
+					{% endif %}
+
+				</li>
+
+				{% endfor %}
+				
+			</ul>
+
+			<script type="text/javascript">
+				const del = document.querySelectorAll('.delete')
+
+				del.forEach((item)=> {
+					item.addEventListener("click", ()=> {
+						let link = item.id
+						link = link.split('_')
+						link = '../characters/delete/' + link[1]
+
+						let conf = confirm('Quer deletar esse personagem?')
+
+						if (conf) {
+							window.location.href = link
+						}
+					})
+				})
+			</script>
+		</div>
+
+		<div class="paginator">
+			<nav>
+				<a {% if characters.has_previous %} href="?page={{characters.previous_page_number}}"class="paginator-a-y"{% else %} class="paginator-a-n"{% endif %}>anterior</a>
+				<p>{{characters.number}} de {{characters.paginator.num_pages}}</p>
+				<a {% if characters.has_next %} href="?page={{characters.next_page_number}}"class="paginator-a-y"{% else %} class="paginator-a-n"{% endif %}>próximo</a>
+			</nav>
+		</div>
+	</main>
+	{% endblock %}
