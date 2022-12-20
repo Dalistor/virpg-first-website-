@@ -221,7 +221,7 @@
 				<li class="campaign-view">
 					<span class="campaign"><a href="{{campaign.id}}/characters/">{{campaign.name}}</a></span>
 
-					{% if campaign.user == request.user or request.user.is_staff %}
+					{% if campaign.admin == request.user or request.user.is_staff %}
 					<div class="campaign-options">
 						<span class="campaign_edit"><a class="edit" href="{{campaign.id}}/edit">editar</a></span>
 						<span class="campaign_del"><a class="delete" id="id_{{campaign.id}}">excluir</a></span>
@@ -240,7 +240,7 @@
 					item.addEventListener("click", ()=> {
 						let link = item.id
 						link = link.split('_')
-						link = '../campaigns/' + link[1] + '/delete/'
+						link = '../campaigns/' + link[1] + '/delete'
 
 						let conf = confirm('Quer deletar essa campanha?')
 

@@ -76,7 +76,7 @@ def campaigns (request):
 
 	#pesquisa
 	if search:
-		all_campaigns = Campaign.objects.filter(name__icontains=search)
+		all_campaigns = Campaign.objects.filter(name__icontains=search, is_private='no')
 		campaigns = takeCampaings(request, all_campaigns, all_characters)
 
 	#nova campanha
@@ -120,6 +120,8 @@ def campaign_edit (request, cid):
 		return redirect('/login/')
 
 	campaign = Campaign.objects.get(pk=cid)
+	if campaign.admin != request.user:
+		return redirect('/campaigns/')
 
 	if (request.method == 'POST'):
 		form = CampaignForm(request.POST, instance=campaign)
@@ -134,8 +136,11 @@ def campaign_del (request, cid):
 	if request.user.is_authenticated == False:
 		return redirect('/login/')
 
-	campaigns = Campaign.objects.get(pk=cid)
-	campaigns.delete()
+	campaign = Campaign.objects.get(pk=cid)
+	if campaign.admin != request.user and request.user.is_staff == False:
+		return redirect('/campaigns/')
+
+	campaign.delete()
 	return redirect('/campaigns/')
 
 
@@ -190,9 +195,12 @@ def takeCharacters(request, campaign, all_characters):
 #edição de personagem
 def character_edit (request, cid, id):
 	if request.user.is_authenticated == False:
-		redirect('/login/')
+		return redirect('/login/')
 
 	character = Character.objects.get(pk=id)
+	if character.user != request.user:
+		return redirect('/campaigns/')
+
 	form = CharacterForm()
 
 	if request.method == 'POST':
@@ -210,9 +218,12 @@ def character_edit (request, cid, id):
 #deletar personagem
 def character_del (request, cid,id):
 	if request.user.is_authenticated == False:
-		redirect('/login/')
+		return redirect('/login/')
 
 	character = Character.objects.get(pk=id)
+	if character.user != request.user:
+		return redirect('/campaigns/')
+
 	character.delete()
 
 	return redirect('../../../' + str(cid) + '/characters/')
@@ -257,6 +268,11 @@ def token (request, id):
 		return redirect('/login/')
 
 	character = Character.objects.get(pk=id)
+	print(character.user)
+	print(request.user)
+	if character.user != request.user:
+		return redirect('/campaigns/')
+
 	attacks = list(Attack.objects.filter(character=character))
 
 	if request.method == 'POST':
